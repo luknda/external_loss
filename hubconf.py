@@ -46,4 +46,4 @@ def combined_loss(ce_weight=1.0, dice_weight=1.0, class_weights=None):
             loss = 1 - dice_coeff.mean()
             return loss
 
-    return CombinedLoss(ce_weight, dice_weight, class_weights)
+    return CombinedLoss()
