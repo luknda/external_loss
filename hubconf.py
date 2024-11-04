@@ -6,20 +6,14 @@ def combined_loss(ce_weight=1.0, dice_weight=1.0, class_weights=None):
     import torch.nn.functional as F
     
     class CombinedLoss(nn.Module):
-        def __init__(self, ce_weight=1.0, dice_weight=1.0, class_weights=None):
+        def __init__(self):
             super(CombinedLoss, self).__init__()
-            self.ce_weight = ce_weight
-            self.dice_weight = dice_weight
-            
-            # Initialize class weights
-            if class_weights is not None:
-                self.class_weights = torch.tensor(class_weights, dtype=torch.float32)
-            else:
-                self.class_weights = None
-            
-            # Placeholder for CrossEntropyLoss; will set weight in forward()
+            self.ce_weight = 1.0
+            self.dice_weight = 1.0
+            self.class_weights = torch.tensor([1.0, 10.0], dtype=torch.float32)
+
             self.ce = nn.CrossEntropyLoss(weight=self.class_weights)
-    
+            
         def forward(self, inputs, targets):
             # Move class_weights to the same device as inputs
             if self.class_weights is not None:
