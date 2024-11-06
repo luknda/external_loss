@@ -10,7 +10,7 @@ def combined_loss(ce_weight=1.0, dice_weight=1.0, class_weights=None):
             super(CombinedLoss, self).__init__()
             self.ce_weight = 1.0
             self.dice_weight = 1.0
-            self.class_weights = torch.tensor([1.0, 6.0], dtype=torch.float32)
+            self.class_weights = torch.tensor([1.0, 10.0], dtype=torch.float32)
 
             self.ce = nn.CrossEntropyLoss(weight=self.class_weights)
             
